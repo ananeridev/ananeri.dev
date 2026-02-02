@@ -1,0 +1,59 @@
+{
+  "profile": {
+    "name": "Seu Nome",
+    "bio": "Sua biografia aqui. Descreva quem você é e o que faz.",
+    "avatarUrl": "https://example.com/seu-avatar.jpg"
+  },
+  "socialLinks": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/seu-perfil"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/@seu-canal"
+    },
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/seu-usuario"
+    },
+    {
+      "platform": "Newsletter",
+      "url": "https://www.linkedin.com/newsletters/seu-newsletter"
+    }
+  ],
+  "mainLinks": [
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@seu-canal",
+      "description": "Assista meus vídeos e tutoriais",
+      "icon": "youtube"
+    },
+    {
+      "name": "LinkedIn Newsletter",
+      "url": "https://www.linkedin.com/newsletters/seu-newsletter",
+      "description": "Inscreva-se para receber insights profissionais",
+      "icon": "newsletter"
+    },
+    {
+      "name": "Work with me",
+      "url": "/work-with-me",
+      "description": "Conheça meu media kit e oportunidades de colaboração",
+      "icon": "external"
+    }
+  ],
+  "featuredContent": [
+    {
+      "title": "Último Vídeo",
+      "imageUrl": "https://example.com/banner-video.jpg",
+      "url": "https://www.youtube.com/@seu-canal",
+      "description": "Confira meu vídeo mais recente"
+    },
+    {
+      "title": "Newsletter Recente",
+      "imageUrl": "https://example.com/banner-newsletter.jpg",
+      "url": "https://www.linkedin.com/newsletters/seu-newsletter",
+      "description": "Leia meu artigo mais recente"
+    }
+  ]
+}

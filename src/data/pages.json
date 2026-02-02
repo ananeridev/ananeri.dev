@@ -1,0 +1,37 @@
+{
+  "palestras": {
+    "title": "Palestras",
+    "description": "Confira minhas palestras e apresentações sobre tecnologia e desenvolvimento.",
+    "items": [
+      {
+        "title": "Título da Palestra 1",
+        "date": "2024-01-15",
+        "event": "Nome do Evento",
+        "description": "Descrição da palestra sobre desenvolvimento web moderno.",
+        "slidesUrl": "https://example.com/slides",
+        "videoUrl": "https://example.com/video"
+      },
+      {
+        "title": "Título da Palestra 2",
+        "date": "2024-02-20",
+        "event": "Outro Evento",
+        "description": "Descrição da palestra sobre React e TypeScript.",
+        "slidesUrl": "https://example.com/slides2",
+        "videoUrl": "https://example.com/video2"
+      }
+    ]
+  },
+  "projetos": {
+    "title": "Projetos",
+    "description": "Alguns dos projetos que desenvolvi e mantenho.",
+    "items": [
+      {
+        "title": "Projeto 1",
+        "description": "Descrição do projeto.",
+        "url": "https://example.com/project1",
+        "githubUrl": "https://github.com/example/project1",
+        "technologies": ["React", "TypeScript", "Node.js"]
+      }
+    ]
+  }
+}

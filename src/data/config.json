@@ -1,0 +1,59 @@
+{
+  "profile": {
+    "name": "Ana Neri",
+    "bio": "Desenvolvedora, criadora de conteúdo e palestrante. Compartilhando conhecimento sobre tecnologia e desenvolvimento.",
+    "avatarUrl": ""
+  },
+  "socialLinks": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ananeridev"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/@AnaNeriDev"
+    },
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/ananeridev"
+    },
+    {
+      "platform": "Newsletter",
+      "url": "https://www.linkedin.com/newsletters/7078868497379786752/"
+    }
+  ],
+  "mainLinks": [
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@AnaNeriDev",
+      "description": "Assista meus vídeos e tutoriais sobre desenvolvimento",
+      "icon": "youtube"
+    },
+    {
+      "name": "LinkedIn Newsletter",
+      "url": "https://www.linkedin.com/newsletters/7078868497379786752/",
+      "description": "Inscreva-se para receber insights profissionais e artigos",
+      "icon": "newsletter"
+    },
+    {
+      "name": "Work with me",
+      "url": "/work-with-me",
+      "description": "Conheça meu media kit e oportunidades de colaboração",
+      "icon": "external"
+    }
+  ],
+  "featuredContent": [
+    {
+      "title": "Último Vídeo",
+      "imageUrl": "https://via.placeholder.com/800x400?text=Latest+Video",
+      "url": "https://www.youtube.com/@AnaNeriDev",
+      "description": "Confira meu vídeo mais recente sobre desenvolvimento web"
+    },
+    {
+      "title": "Newsletter Recente",
+      "imageUrl": "https://via.placeholder.com/800x400?text=Latest+Newsletter",
+      "url": "https://www.linkedin.com/newsletters/7078868497379786752/",
+      "description": "Leia meu artigo mais recente sobre tendências da indústria"
+    }
+  ]
+}
