@@ -36,6 +36,10 @@ function Home() {
   
   // Busca conteúdo com dados dinâmicos
   const latestContent = getLatestFeaturedContent(dynamicVideo, null);
+
+  // Destaque específico para newsletter nos main links
+  const newsletterLink = config.mainLinks.find((link) => link.icon === 'newsletter');
+  const otherMainLinks = config.mainLinks.filter((link) => link.icon !== 'newsletter');
   
   return (
     <div className="min-h-screen relative z-10">
@@ -80,7 +84,20 @@ function Home() {
             {t('home.mainLinks')}
           </h2>
           <div className="grid gap-4">
-            {config.mainLinks.map((link, index) => (
+            {/* Newsletter em destaque */}
+            {newsletterLink && (
+              <div className="border-2 border-pink-500 rounded-xl p-1 bg-pink-50/60 shadow-[0_0_0_1px_rgba(0,0,0,0.1)]">
+                <Social
+                  name={newsletterLink.name}
+                  icon={iconMap[newsletterLink.icon] || iconMap.newsletter}
+                  url={newsletterLink.url}
+                  description={newsletterLink.description}
+                />
+              </div>
+            )}
+
+            {/* Demais links principais */}
+            {otherMainLinks.map((link, index) => (
               <Social
                 key={index}
                 name={link.name}
@@ -134,7 +151,7 @@ function Home() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 relative">
+      <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-400 relative">
         <Background />
         <LanguageSwitcher />
         <Routes>

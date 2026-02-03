@@ -151,11 +151,11 @@ As palestras aparecem automaticamente em `/palestras` ordenadas por data (mais r
 Para personalizar os ícones animados do fundo, edite `src/components/Background.tsx`:
 
 ```typescript
-import { Code, Dumbbell, BookOpen, Cat, Dog, User } from 'lucide-react';
+import { Code, Dumbbell, BookOpen, Cat, Dog, Flower2 } from 'lucide-react';
 
 const icons = [
   { Icon: Code, x: '10%', y: '20%', delay: '0s' },
-  { Icon: Dumbbell, x: '85%', y: '15%', delay: '1s' },
+  { Icon: Flower2, x: '85%', y: '15%', delay: '1s' },
   // ... mais ícones
 ];
 ```
@@ -166,7 +166,7 @@ const icons = [
 - `BookOpen` - Ícone de leitura
 - `Cat` - Ícone de gato
 - `Dog` - Ícone de cachorro
-- `User` - Ícone de yoga
+- `Flower2` - Ícone com vibe de yoga/bem-estar
 
 Veja todos os ícones disponíveis em [lucide.dev](https://lucide.dev)
 

@@ -12,7 +12,7 @@ interface Speech {
   videoUrl?: string;
   slidesUrl?: string;
   githubUrl?: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 export function Speeches() {
@@ -61,16 +61,18 @@ export function Speeches() {
                 key={speech.id}
                 className="overflow-hidden rounded-lg border-2 border-black hover:border-pink-500 hover:shadow-xl transition-all duration-300 bg-white"
               >
-                <div className="grid md:grid-cols-3 gap-0">
-                  <div className="md:col-span-1 h-48 md:h-auto overflow-hidden">
-                    <img
-                      src={speech.imageUrl}
-                      alt={speech.title}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
+                <div className={`grid gap-0 ${speech.imageUrl ? 'md:grid-cols-3' : 'md:grid-cols-1'}`}>
+                  {speech.imageUrl && (
+                    <div className="md:col-span-1 h-48 md:h-auto overflow-hidden">
+                      <img
+                        src={speech.imageUrl}
+                        alt={speech.title}
+                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
 
-                  <div className="md:col-span-2 p-6 flex flex-col justify-between">
+                  <div className={`${speech.imageUrl ? 'md:col-span-2' : 'md:col-span-1'} p-6 flex flex-col justify-between`}>
                     <div>
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <h2 className="text-2xl font-bold text-black flex-1">{speech.title}</h2>
