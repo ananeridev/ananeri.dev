@@ -1,13 +1,13 @@
-import { Code, Terminal, Database, Cpu, Zap, GitBranch } from 'lucide-react';
+import { Code, Dumbbell, BookOpen, Cat, Dog, User } from 'lucide-react';
 
 export function Background() {
   const icons = [
     { Icon: Code, x: '10%', y: '20%', delay: '0s' },
-    { Icon: Terminal, x: '85%', y: '15%', delay: '1s' },
-    { Icon: Database, x: '15%', y: '60%', delay: '2s' },
-    { Icon: Cpu, x: '80%', y: '55%', delay: '1.5s' },
-    { Icon: Zap, x: '50%', y: '10%', delay: '0.5s' },
-    { Icon: GitBranch, x: '90%', y: '70%', delay: '2.5s' },
+    { Icon: User, x: '85%', y: '15%', delay: '1s' },
+    { Icon: Dumbbell, x: '15%', y: '60%', delay: '2s' },
+    { Icon: Cat, x: '80%', y: '55%', delay: '1.5s' },
+    { Icon: Dog, x: '50%', y: '10%', delay: '0.5s' },
+    { Icon: BookOpen, x: '90%', y: '70%', delay: '2.5s' },
   ];
 
   return (

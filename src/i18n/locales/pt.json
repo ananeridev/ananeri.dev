@@ -6,14 +6,14 @@
     "pageNotFoundDescription": "A página que você está procurando não existe."
   },
   "home": {
-    "featuredContent": "Featured Content",
-    "mainLinks": "Main Links",
+    "featuredContent": "Conteúdo em Destaque",
+    "mainLinks": "Links Principais",
     "moreContent": "Mais Conteúdo",
     "speeches": "Palestras",
     "speechesDescription": "Confira minhas palestras e apresentações"
   },
   "workWithMe": {
-    "title": "Work with me",
+    "title": "Trabalhe Comigo",
     "description": "Conheça meu media kit e descubra oportunidades de colaboração",
     "mediaKit": "Media Kit",
     "mediaKitDescription": "Acesse meu media kit completo com informações sobre mim, estatísticas, formatos de conteúdo disponíveis e muito mais.",
@@ -23,7 +23,7 @@
       "speeches": "Palestras e workshops",
       "partnerships": "Parcerias de conteúdo",
       "consulting": "Consultoria técnica",
-      "brand": "Brand partnerships"
+      "brand": "Parcerias com marcas"
     }
   },
   "contentPage": {

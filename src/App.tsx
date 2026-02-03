@@ -7,6 +7,7 @@ import { Background } from './components/Background';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { WorkWithMe } from './pages/WorkWithMe';
 import { ContentPage } from './pages/ContentPage';
+import { Speeches } from './pages/Speeches';
 import configData from './data/config.json';
 import type { ConfigData } from './types';
 import { getLatestFeaturedContent } from './utils/featuredContent';
@@ -139,6 +140,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/work-with-me" element={<WorkWithMe />} />
+          <Route path="/palestras" element={<Speeches />} />
           <Route path="/:pageId" element={<ContentPage />} />
         </Routes>
       </div>

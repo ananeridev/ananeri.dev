@@ -1,29 +1,217 @@
-# Ana Neri Dev - Site Pessoal
+# Ana Neri - Personal Link Hub
 
-🫰🏻 Este site é open-source e pode ser usado como template. Sinta-se livre para editar e adaptar de acordo com suas necessidades.
+Um website moderno e responsivo para compartilhar seus principais links, conteúdo em destaque, palestras e oportunidades de colaboração.
 
-## 🚀 Como Usar
+Este projeto foi inspirado no template [weslley.io](https://github.com/wellwelwel/weslley.io) e mantém a mesma licença AGPL-3.0.
 
-### Deploy e Domínio
+## Características
 
-Para fazer deploy e associar o domínio `ananeri.dev`, consulte o arquivo [DEPLOY.md](./DEPLOY.md) com instruções detalhadas.
+- 🎨 Design moderno com cores personalizáveis (padrão: rosa, preto e branco)
+- 📱 Totalmente responsivo (mobile, tablet, desktop)
+- 🌍 Suporte a múltiplos idiomas (Português e Inglês)
+- 🎥 Integração com YouTube e LinkedIn Newsletter
+- 📊 Seção de conteúdo em destaque
+- 🎤 Página dedicada para palestras e apresentações
+- 💼 Página "Work with me" com media kit
+- 🎨 Ícones animados de fundo personalizáveis
+- ⚡ Construído com React, Vite e Tailwind CSS
+
+## Estrutura de Arquivos
+
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── Avatar.tsx      # Componente de avatar do perfil
+│   ├── Background.tsx  # Padrão de fundo animado
+│   ├── Card.tsx        # Componente de cartão
+│   ├── FeaturedBanner.tsx # Banner de conteúdo em destaque
+│   ├── Footer.tsx      # Rodapé
+│   ├── Header.tsx      # Cabeçalho/Menu
+│   ├── LanguageSwitcher.tsx # Seletor de idioma
+│   ├── Profile.tsx     # Seção de perfil principal
+│   └── Social.tsx      # Ícones de redes sociais
+├── pages/              # Páginas da aplicação
+│   ├── ContentPage.tsx # Página de conteúdo dinâmico
+│   ├── Speeches.tsx    # Lista de palestras
+│   └── WorkWithMe.tsx  # Página de colaborações
+├── data/               # Arquivos de configuração JSON
+│   ├── config.json     # Configuração principal
+│   ├── featured.json   # Conteúdo em destaque
+│   ├── speeches.json   # Lista de palestras
+│   └── pages.json      # Páginas customizáveis
+├── i18n/               # Arquivos de tradução
+│   └── locales/
+│       ├── pt.json     # Português
+│       └── en.json     # Inglês
+├── contexts/           # Contextos React
+│   └── LanguageContext.tsx # Gerenciamento de idioma
+├── hooks/              # Hooks customizados
+│   └── useLatestContent.ts # Hook para conteúdo mais recente
+├── utils/              # Funções utilitárias
+│   └── featuredContent.ts # Utilitários de conteúdo
+└── types/              # Definições de tipos TypeScript
+    └── index.ts        # Types da aplicação
+```
+
+## Como Personalizar
+
+### 1. Informações do Perfil
+
+Edite `src/data/config.json`:
+
+```json
+{
+  "profile": {
+    "name": "Seu Nome",
+    "bio": "Sua bio aqui",
+    "avatarUrl": "URL da sua foto"
+  }
+}
+```
+
+### 2. Links Principais
+
+Adicione ou modifique os links em `src/data/config.json`:
+
+```json
+"mainLinks": [
+  {
+    "name": "YouTube",
+    "url": "https://www.youtube.com/@SeuCanal",
+    "description": "Descrição do link",
+    "icon": "youtube"
+  }
+]
+```
+
+Ícones disponíveis:
+- `youtube` - Ícone do YouTube
+- `newsletter` - Ícone de newsletter (livro)
+- `linkedin` - Ícone do LinkedIn
+- `github` - Ícone do GitHub
+- `external` - Ícone de link externo
+
+### 3. Conteúdo em Destaque
+
+Edite `src/data/featured.json`:
+
+```json
+{
+  "featured": [
+    {
+      "id": 1,
+      "title": "Título do Conteúdo",
+      "description": "Descrição",
+      "image": "URL da imagem",
+      "link": "URL do conteúdo",
+      "type": "video" ou "newsletter",
+      "date": "2024-01-15"
+    }
+  ]
+}
+```
+
+### 4. Palestras e Apresentações
+
+Edite `src/data/speeches.json` para adicionar suas palestras:
+
+```json
+{
+  "speeches": [
+    {
+      "id": "id-unico",
+      "title": "Título da Palestra",
+      "event": "Nome do Evento",
+      "date": "2024-03-15",
+      "description": "Descrição da palestra",
+      "videoUrl": "Link do vídeo (opcional)",
+      "slidesUrl": "Link dos slides (opcional)",
+      "githubUrl": "Link do GitHub (opcional)",
+      "imageUrl": "URL da imagem"
+    }
+  ]
+}
+```
+
+**Campos disponíveis:**
+- `id`: Identificador único (string)
+- `title`: Título da palestra (string)
+- `event`: Nome do evento/conferência (string)
+- `date`: Data da palestra (ISO format: YYYY-MM-DD)
+- `description`: Descrição da palestra (string)
+- `imageUrl`: URL da imagem (obrigatório)
+- `videoUrl`: URL do vídeo (opcional)
+- `slidesUrl`: URL dos slides (opcional)
+- `githubUrl`: URL do repositório GitHub (opcional)
+
+As palestras aparecem automaticamente em `/palestras` ordenadas por data (mais recentes primeiro).
+
+### 5. Ícones de Fundo
+
+Para personalizar os ícones animados do fundo, edite `src/components/Background.tsx`:
+
+```typescript
+import { Code, Dumbbell, BookOpen, Cat, Dog, User } from 'lucide-react';
+
+const icons = [
+  { Icon: Code, x: '10%', y: '20%', delay: '0s' },
+  { Icon: Dumbbell, x: '85%', y: '15%', delay: '1s' },
+  // ... mais ícones
+];
+```
+
+Ícones inclusos por padrão:
+- `Code` - Ícone de código
+- `Dumbbell` - Ícone de academia/fitness
+- `BookOpen` - Ícone de leitura
+- `Cat` - Ícone de gato
+- `Dog` - Ícone de cachorro
+- `User` - Ícone de yoga
+
+Veja todos os ícones disponíveis em [lucide.dev](https://lucide.dev)
+
+### 6. Cores
+
+Customize as cores editando as classes Tailwind. As cores padrão são:
+- `pink-500` e `pink-600` - Cor primária
+- `black` - Texto e bordas
+- `white` - Fundo e contraste
+
+### 7. Idiomas
+
+Adicione ou modifique traduções em `src/i18n/locales/`:
+
+**Portuguese (pt.json):**
+```json
+{
+  "home": {
+    "featuredContent": "Conteúdo em Destaque",
+    "mainLinks": "Links Principais",
+    "speeches": "Palestras"
+  }
+}
+```
+
+**English (en.json):**
+```json
+{
+  "home": {
+    "featuredContent": "Featured Content",
+    "mainLinks": "Main Links",
+    "speeches": "Speeches"
+  }
+}
+```
+
+## Desenvolvimento
 
 ### Instalação
 
-1. Clone o repositório:
-```bash
-git clone <seu-repositorio>
-cd ananeri.dev
-```
-
-2. Instale as dependências:
 ```bash
 npm install
 ```
 
-### Desenvolvimento
-
-Para iniciar o servidor de desenvolvimento e ver suas mudanças em tempo real:
+### Rodar o servidor de desenvolvimento
 
 ```bash
 npm run dev
@@ -31,219 +219,119 @@ npm run dev
 
 O site estará disponível em `http://localhost:5173`
 
-### Build
-
-Para criar uma build de produção:
+### Build para produção
 
 ```bash
 npm run build
 ```
 
-Para visualizar a build:
+### Preview da build
 
 ```bash
 npm run preview
 ```
 
-### Outros Comandos
+### Verificar tipos TypeScript
 
 ```bash
-# Verificar erros de tipo TypeScript
 npm run typecheck
-
-# Corrigir erros de lint automaticamente
-npm run lint
 ```
 
-## 📁 Estrutura do Projeto
+### Corrigir erros de linting
 
-```
-src/
-├── components/          # Componentes reutilizáveis
-│   ├── Avatar.tsx      # Componente de avatar redondo
-│   ├── Background.tsx  # Fundo com textura dinâmica
-│   ├── Card.tsx        # Card para links principais
-│   ├── FeaturedBanner.tsx  # Banner para conteúdo em destaque
-│   ├── Profile.tsx     # Perfil com avatar e redes sociais
-│   ├── Social.tsx      # Link social principal
-│   └── SocialIcon.tsx  # Ícone de rede social colorido
-├── data/               # Arquivos de configuração JSON
-│   ├── config.json     # Configuração principal (perfil, links, etc.)
-│   └── pages.json      # Páginas editáveis (palestras, projetos, etc.)
-├── pages/              # Páginas da aplicação
-│   ├── WorkWithMe.tsx  # Página "Work with me"
-│   └── ContentPage.tsx # Página dinâmica para conteúdo editável
-├── App.tsx             # Componente principal com rotas
-└── main.tsx            # Ponto de entrada
+```bash
+npm run lint:fix
 ```
 
-## ⚙️ Configuração
+## Deploy
 
-### Personalizar Perfil e Links
+### GitHub Pages
 
-Edite o arquivo `src/data/config.json`:
+1. Crie um repositório no GitHub
+2. Configure o repositório como público
+3. Em "Settings" > "Pages", selecione "Deploy from a branch"
+4. Faça push da pasta `dist/` ou configure um workflow de CI/CD
 
-```json
-{
-  "profile": {
-    "name": "Seu Nome",
-    "bio": "Sua biografia",
-    "avatarUrl": "URL_DO_SEU_AVATAR"
-  },
-  "socialLinks": [
-    {
-      "platform": "LinkedIn",
-      "url": "https://linkedin.com/in/seu-perfil"
-    }
-  ],
-  "mainLinks": [
-    {
-      "name": "YouTube",
-      "url": "https://youtube.com/@seu-canal",
-      "description": "Descrição do link",
-      "icon": "youtube"
-    }
-  ],
-  "featuredContent": [
-    {
-      "title": "Título do Conteúdo",
-      "imageUrl": "URL_DA_IMAGEM",
-      "url": "URL_DO_CONTEUDO",
-      "description": "Descrição do conteúdo"
-    }
-  ]
-}
+**Opção com GitHub Actions:**
+
+Crie `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 ```
 
-### Adicionar/Editar Páginas de Conteúdo
+### Vercel
 
-Edite o arquivo `src/data/pages.json` para adicionar ou modificar páginas como palestras, projetos, etc.
+1. Conecte seu repositório ao Vercel
+2. Selecione "Vite" como framework
+3. Deploy automático acontecerá a cada push
 
-**Exemplo - Adicionar uma nova página de palestras:**
+### Netlify
 
-```json
-{
-  "palestras": {
-    "title": "Palestras",
-    "description": "Minhas palestras e apresentações",
-    "items": [
-      {
-        "title": "Título da Palestra",
-        "date": "2024-01-15",
-        "event": "Nome do Evento",
-        "description": "Descrição da palestra",
-        "slidesUrl": "https://example.com/slides",
-        "videoUrl": "https://example.com/video"
-      }
-    ]
-  }
-}
+1. Conecte seu repositório ao Netlify
+2. Configure o comando de build: `npm run build`
+3. Configure a pasta de deploy: `dist`
+
+## Licença
+
+Este projeto está sob licença **AGPL-3.0**.
+
+Este site foi construído usando o template [weslley.io](https://github.com/wellwelwel/weslley.io) sob licença AGPL-3.0.
+
+## Tecnologias
+
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **React Router** - Navigation
+- **Lucide React** - Icons
+
+## Dicas de Customização
+
+### Adicionar novas páginas
+
+1. Crie um arquivo em `src/pages/SuaPagina.tsx`
+2. Importe em `src/App.tsx`
+3. Adicione a rota:
+
+```typescript
+<Route path="/sua-rota" element={<SuaPagina />} />
 ```
 
-**Exemplo - Adicionar uma página de projetos:**
+### Integrar conteúdo dinâmico
 
-```json
-{
-  "projetos": {
-    "title": "Projetos",
-    "description": "Meus projetos",
-    "items": [
-      {
-        "title": "Nome do Projeto",
-        "description": "Descrição do projeto",
-        "url": "https://example.com/project",
-        "githubUrl": "https://github.com/user/project",
-        "technologies": ["React", "TypeScript"]
-      }
-    ]
-  }
-}
-```
+Você pode integrar APIs externas (YouTube, LinkedIn, etc.) para buscar conteúdo dinâmico. Veja `src/hooks/useLatestContent.ts` como exemplo.
 
-Para acessar essas páginas, adicione links no `config.json` ou crie links na página inicial no `App.tsx`:
+### Adicionar seções customizadas
 
-```tsx
-<Link to="/palestras">Palestras</Link>
-<Link to="/projetos">Projetos</Link>
-```
+1. Crie um novo arquivo JSON em `src/data/`
+2. Importe nos componentes necessários
+3. Exiba os dados usando componentes React
 
-### Personalizar Cores e Estilo
+## Suporte
 
-As cores principais estão definidas usando Tailwind CSS. Você pode personalizar:
-
-- **Cores principais**: Edite as classes no código (ex: `bg-pink-500`, `text-pink-600`)
-- **Fundo**: Modifique o `Background.tsx` para alterar a textura e ícones
-- **Fontes**: Configure no `tailwind.config.js`
-
-### Adicionar Redes Sociais
-
-1. Adicione o ícone no componente `SocialIcon.tsx` se necessário
-2. Adicione a entrada em `config.json`:
-
-```json
-{
-  "socialLinks": [
-    {
-      "platform": "NomeDaPlataforma",
-      "url": "https://..."
-    }
-  ]
-}
-```
-
-Os ícones suportados atualmente:
-- LinkedIn
-- YouTube
-- GitHub
-- Twitter
-- Email
-- Newsletter
-
-## 🎨 Características
-
-- ✅ **Responsivo**: Funciona perfeitamente em mobile e desktop
-- ✅ **Editável via JSON**: Configure tudo sem tocar no código
-- ✅ **Fundo dinâmico**: Textura com ícones sutis animados
-- ✅ **Ícones coloridos**: Redes sociais com cores oficiais
-- ✅ **Featured Content**: Destaque para conteúdo mais recente
-- ✅ **Rotas dinâmicas**: Páginas editáveis via JSON
-- ✅ **TypeScript**: Tipagem forte para melhor desenvolvimento
-
-## 📝 Licença
-
-Este projeto está sob a licença AGPL-3.0. Ao usar este template:
-
-- Seu código também precisa estar open-source e sob a mesma licença
-- Você pode mudar tudo, exceto a licença
-- É importante mencionar este repositório no seu site
-
-Exemplo de menção:
-> Este site foi construído usando o template [ananeri.dev](https://github.com/seu-usuario/ananeri.dev)
-
-## 🛠️ Tecnologias Utilizadas
-
-- **React** - Biblioteca UI
-- **TypeScript** - Tipagem estática
-- **Vite** - Build tool e dev server
-- **Tailwind CSS** - Estilização
-- **React Router** - Roteamento
-- **Lucide React** - Ícones
-
-## 📚 Recursos Úteis
-
-- [Documentação do React](https://react.dev)
-- [Documentação do Tailwind CSS](https://tailwindcss.com)
-- [Documentação do Vite](https://vitejs.dev)
-- [Documentação do React Router](https://reactrouter.com)
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se livre para abrir issues ou pull requests.
-
-## 📧 Contato
-
-Para dúvidas ou sugestões, entre em contato através das redes sociais configuradas no site.
+Para dúvidas ou sugestões, abra uma issue no repositório ou entre em contato através dos links de redes sociais.
 
 ---
 
-Feito com ❤️ usando React + Vite + Tailwind CSS
+Feito com React + Vite + Tailwind CSS
