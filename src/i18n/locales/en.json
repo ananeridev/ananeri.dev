@@ -1,0 +1,39 @@
+{
+  "common": {
+    "loading": "Loading content...",
+    "backToHome": "← Back to home",
+    "pageNotFound": "Page not found",
+    "pageNotFoundDescription": "The page you are looking for does not exist."
+  },
+  "home": {
+    "featuredContent": "Featured Content",
+    "mainLinks": "Main Links",
+    "moreContent": "More Content",
+    "speeches": "Speeches",
+    "speechesDescription": "Check out my speeches and presentations"
+  },
+  "workWithMe": {
+    "title": "Work with me",
+    "description": "Get to know my media kit and discover collaboration opportunities",
+    "mediaKit": "Media Kit",
+    "mediaKitDescription": "Access my complete media kit with information about me, statistics, available content formats and much more.",
+    "accessMediaKit": "Access Media Kit",
+    "collaborationOpportunities": "Collaboration Opportunities",
+    "opportunities": {
+      "speeches": "Speeches and workshops",
+      "partnerships": "Content partnerships",
+      "consulting": "Technical consulting",
+      "brand": "Brand partnerships"
+    }
+  },
+  "contentPage": {
+    "viewMore": "View more",
+    "video": "Video",
+    "slides": "Slides",
+    "github": "GitHub"
+  },
+  "footer": {
+    "madeWith": "Made with React + Vite + Tailwind CSS",
+    "inspiredBy": "Inspired by open-source templates"
+  }
+}

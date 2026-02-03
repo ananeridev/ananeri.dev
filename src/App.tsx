@@ -4,10 +4,14 @@ import { Profile } from './components/Profile';
 import { Social } from './components/Social';
 import { FeaturedBanner } from './components/FeaturedBanner';
 import { Background } from './components/Background';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { WorkWithMe } from './pages/WorkWithMe';
 import { ContentPage } from './pages/ContentPage';
 import configData from './data/config.json';
 import type { ConfigData } from './types';
+import { getLatestFeaturedContent } from './utils/featuredContent';
+import { useLatestContent } from './hooks/useLatestContent';
+import { useLanguage } from './contexts/LanguageContext';
 
 const iconMap: Record<string, React.ReactNode> = {
   youtube: <Youtube className="w-6 h-6 text-white" />,
@@ -19,6 +23,18 @@ const iconMap: Record<string, React.ReactNode> = {
 
 function Home() {
   const config = configData as ConfigData;
+  const { latestVideoUrl, latestVideoThumbnail, latestVideoTitle, loading } = useLatestContent();
+  const { t } = useLanguage();
+  
+  // Prepara dados dinâmicos do vídeo
+  const dynamicVideo = latestVideoUrl && latestVideoThumbnail ? {
+    url: latestVideoUrl,
+    thumbnail: latestVideoThumbnail,
+    title: latestVideoTitle || 'Último Vídeo'
+  } : null;
+  
+  // Busca conteúdo com dados dinâmicos
+  const latestContent = getLatestFeaturedContent(dynamicVideo, null);
   
   return (
     <div className="min-h-screen relative z-10">
@@ -30,22 +46,29 @@ function Home() {
           socialLinks={config.socialLinks}
         />
 
-        {/* Featured Content - Aparece primeiro */}
+        {/* Featured Content - Aparece primeiro - Sempre mostra vídeo e newsletter mais recentes */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
             <span className="w-1 h-8 bg-pink-500 rounded"></span>
-            Featured Content
+            {t('home.featuredContent')}
           </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {config.featuredContent.map((content, index) => (
-              <FeaturedBanner
-                key={index}
-                title={content.title}
-                imageUrl={content.imageUrl}
-                url={content.url}
-                description={content.description}
-              />
-            ))}
+          <div className={`grid gap-6 ${latestContent.length === 1 ? 'md:grid-cols-1' : 'md:grid-cols-2'}`}>
+            {loading && latestContent.length === 0 ? (
+              <div className="col-span-2 text-center py-8">
+                <p className="text-gray-600">{t('common.loading')}</p>
+              </div>
+            ) : (
+              latestContent.map((content, index) => (
+                <FeaturedBanner
+                  key={index}
+                  title={content.title}
+                  imageUrl={content.imageUrl}
+                  url={content.url}
+                  description={content.description}
+                  type={content.type}
+                />
+              ))
+            )}
           </div>
         </section>
 
@@ -53,7 +76,7 @@ function Home() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
             <span className="w-1 h-8 bg-pink-500 rounded"></span>
-            Main Links
+            {t('home.mainLinks')}
           </h2>
           <div className="grid gap-4">
             {config.mainLinks.map((link, index) => (
@@ -72,7 +95,7 @@ function Home() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
             <span className="w-1 h-8 bg-pink-500 rounded"></span>
-            Mais Conteúdo
+            {t('home.moreContent')}
           </h2>
           <div className="grid gap-4">
             <Link
@@ -84,10 +107,10 @@ function Home() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-black group-hover:text-pink-600 transition-colors">
-                  Palestras
+                  {t('home.speeches')}
                 </h3>
                 <p className="text-sm text-gray-600 mt-1">
-                  Confira minhas palestras e apresentações
+                  {t('home.speechesDescription')}
                 </p>
               </div>
             </Link>
@@ -96,10 +119,10 @@ function Home() {
 
         <footer className="text-center pt-8 border-t-2 border-pink-200">
           <p className="text-gray-600">
-            Feito com React + Vite + Tailwind CSS
+            {t('footer.madeWith')}
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Inspirado em templates open-source
+            {t('footer.inspiredBy')}
           </p>
         </footer>
       </div>
@@ -112,6 +135,7 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 relative">
         <Background />
+        <LanguageSwitcher />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/work-with-me" element={<WorkWithMe />} />

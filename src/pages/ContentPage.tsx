@@ -2,23 +2,25 @@ import { useParams, Link } from 'react-router-dom';
 import { ExternalLink, Calendar, MapPin } from 'lucide-react';
 import pagesData from '../data/pages.json';
 import type { PagesData, PageItem } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function ContentPage() {
   const { pageId } = useParams<{ pageId: string }>();
   const page = pageId ? (pagesData as PagesData)[pageId] : null;
+  const { t, language } = useLanguage();
 
   if (!page) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 relative">
         <div className="max-w-4xl mx-auto px-6 py-16">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-black mb-4">Página não encontrada</h1>
-            <p className="text-gray-700 mb-6">A página que você está procurando não existe.</p>
+            <h1 className="text-4xl font-bold text-black mb-4">{t('common.pageNotFound')}</h1>
+            <p className="text-gray-700 mb-6">{t('common.pageNotFoundDescription')}</p>
             <Link
               to="/"
               className="text-pink-600 hover:text-pink-700 font-semibold transition-colors"
             >
-              ← Voltar para a página inicial
+              {t('common.backToHome')}
             </Link>
           </div>
         </div>
@@ -49,7 +51,7 @@ export function ContentPage() {
               {item.date && (
                 <div className="flex items-center gap-2 text-gray-600 mb-2">
                   <Calendar className="w-5 h-5" />
-                  <span>{new Date(item.date).toLocaleDateString('pt-BR')}</span>
+                  <span>{new Date(item.date).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US')}</span>
                 </div>
               )}
               
@@ -85,7 +87,7 @@ export function ContentPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-pink-500 transition-all duration-300"
                   >
-                    Ver mais
+                    {t('contentPage.viewMore')}
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
@@ -96,7 +98,7 @@ export function ContentPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-all duration-300"
                   >
-                    GitHub
+                    {t('contentPage.github')}
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
@@ -107,7 +109,7 @@ export function ContentPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300"
                   >
-                    Slides
+                    {t('contentPage.slides')}
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
@@ -118,7 +120,7 @@ export function ContentPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300"
                   >
-                    Vídeo
+                    {t('contentPage.video')}
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
@@ -132,7 +134,7 @@ export function ContentPage() {
             to="/"
             className="text-pink-600 hover:text-pink-700 font-semibold transition-colors"
           >
-            ← Voltar para a página inicial
+            {t('common.backToHome')}
           </Link>
         </div>
       </div>

@@ -21,6 +21,12 @@ export interface FeaturedContent {
   imageUrl: string;
   url: string;
   description?: string;
+  type?: 'video' | 'newsletter';
+}
+
+export interface LatestContent {
+  latestVideoUrl?: string;
+  latestNewsletterUrl?: string;
 }
 
 export interface ConfigData {
@@ -28,6 +34,7 @@ export interface ConfigData {
   socialLinks: SocialLink[];
   mainLinks: MainLink[];
   featuredContent: FeaturedContent[];
+  latestContent?: LatestContent;
 }
 
 export interface PageItem {

@@ -36,11 +36,13 @@ export function SocialIcon({ platform, url, size = 32 }: SocialIconProps) {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${colorClass} w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+      className={`${colorClass} w-10 h-10 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:rotate-3 group`}
       style={{ width: `${size}px`, height: `${size}px` }}
       aria-label={platform}
     >
-      {icon}
+      <span className="group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </span>
     </a>
   );
 }
