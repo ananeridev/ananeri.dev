@@ -1,6 +1,5 @@
 export interface ProfileConfig {
   name: string;
-  bio: string;
   avatarUrl: string;
 }
 

@@ -1,7 +1,9 @@
 {
-  "palestras": {
+  "speeches": {
     "title": "Palestras",
+    "title_en": "Talks",
     "description": "Confira minhas palestras e apresentações sobre tecnologia e desenvolvimento.",
+    "description_en": "Check out my talks and presentations about technology and development.",
     "items": [
       {
         "title": "Título da Palestra 1",
@@ -21,9 +23,11 @@
       }
     ]
   },
-  "projetos": {
+  "projects": {
     "title": "Projetos",
+    "title_en": "Projects",
     "description": "Alguns dos projetos que desenvolvi e mantenho.",
+    "description_en": "Some of the projects I have developed and maintain.",
     "items": [
       {
         "title": "Projeto 1",

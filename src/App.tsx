@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Github, Linkedin, Youtube, BookOpen, ExternalLink } from 'lucide-react';
 import { Profile } from './components/Profile';
 import { Social } from './components/Social';
@@ -40,13 +40,35 @@ function Home() {
   // Destaque específico para newsletter nos main links
   const newsletterLink = config.mainLinks.find((link) => link.icon === 'newsletter');
   const otherMainLinks = config.mainLinks.filter((link) => link.icon !== 'newsletter');
+
+  const getMainLinkText = (icon: string) => {
+    switch (icon) {
+      case 'youtube':
+        return {
+          title: t('mainLinksDetails.youtube.title'),
+          description: t('mainLinksDetails.youtube.description'),
+        };
+      case 'newsletter':
+        return {
+          title: t('mainLinksDetails.newsletter.title'),
+          description: t('mainLinksDetails.newsletter.description'),
+        };
+      case 'external':
+        return {
+          title: t('mainLinksDetails.workWithMe.title'),
+          description: t('mainLinksDetails.workWithMe.description'),
+        };
+      default:
+        return { title: '', description: '' };
+    }
+  };
   
   return (
     <div className="min-h-screen relative z-10">
       <div className="max-w-4xl mx-auto px-6 py-16">
         <Profile
           name={config.profile.name}
-          bio={config.profile.bio}
+          bio={t('profile.bio')}
           avatarUrl={config.profile.avatarUrl}
           socialLinks={config.socialLinks}
         />
@@ -87,24 +109,34 @@ function Home() {
             {/* Newsletter em destaque */}
             {newsletterLink && (
               <div className="border-2 border-pink-500 rounded-xl p-1 bg-pink-50/60 shadow-[0_0_0_1px_rgba(0,0,0,0.1)]">
+                {(() => {
+                  const texts = getMainLinkText(newsletterLink.icon);
+                  return (
                 <Social
-                  name={newsletterLink.name}
+                  name={texts.title || newsletterLink.name}
                   icon={iconMap[newsletterLink.icon] || iconMap.newsletter}
                   url={newsletterLink.url}
-                  description={newsletterLink.description}
+                  description={texts.description || newsletterLink.description}
                 />
+                  );
+                })()}
               </div>
             )}
 
             {/* Demais links principais */}
             {otherMainLinks.map((link, index) => (
-              <Social
-                key={index}
-                name={link.name}
-                icon={iconMap[link.icon] || iconMap.external}
-                url={link.url}
-                description={link.description}
-              />
+              (() => {
+                const texts = getMainLinkText(link.icon);
+                return (
+                  <Social
+                    key={index}
+                    name={texts.title || link.name}
+                    icon={iconMap[link.icon] || iconMap.external}
+                    url={link.url}
+                    description={texts.description || link.description}
+                  />
+                );
+              })()
             ))}
           </div>
         </section>
@@ -117,7 +149,7 @@ function Home() {
           </h2>
           <div className="grid gap-4">
             <Link
-              to="/palestras"
+              to="/speeches"
               className="group flex items-center gap-4 p-6 bg-white border-2 border-black rounded-lg hover:bg-pink-50 hover:border-pink-500 transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-black group-hover:bg-pink-500 rounded-lg transition-colors duration-300">
@@ -136,11 +168,20 @@ function Home() {
         </section>
 
         <footer className="text-center pt-8 border-t-2 border-pink-200">
-          <p className="text-gray-600">
-            {t('footer.madeWith')}
+          <p className="text-sm text-gray-600">
+            {t('footer.byAna')}
           </p>
-          <p className="text-sm text-gray-500 mt-2">
-            {t('footer.inspiredBy')}
+          <p className="text-xs text-gray-500 mt-2">
+            {t('footer.creditWeslleyPrefix')}{' '}
+            <a
+              href="https://github.com/wellwelwel/weslley.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-600 hover:text-pink-700 underline"
+            >
+              weslley.io
+            </a>{' '}
+            {t('footer.creditWeslleySuffix')}
           </p>
         </footer>
       </div>
@@ -157,7 +198,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/work-with-me" element={<WorkWithMe />} />
-          <Route path="/palestras" element={<Speeches />} />
+          <Route path="/speeches" element={<Speeches />} />
+          {/* rota antiga em PT redireciona para a nova URI em inglês */}
+          <Route path="/palestras" element={<Navigate to="/speeches" replace />} />
           <Route path="/:pageId" element={<ContentPage />} />
         </Routes>
       </div>

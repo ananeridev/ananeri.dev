@@ -6,11 +6,36 @@
     "pageNotFoundDescription": "A página que você está procurando não existe."
   },
   "home": {
-    "featuredContent": "Conteúdo em Destaque",
-    "mainLinks": "Links Principais",
-    "moreContent": "Mais Conteúdo",
-    "speeches": "Palestras",
-    "speechesDescription": "Confira minhas palestras e apresentações"
+  "featuredContent": "Conteúdo em Destaque",
+  "mainLinks": "Links Principais",
+  "moreContent": "Mais Conteúdo",
+  "speeches": "Palestras",
+  "speechesDescription": "Confira minhas palestras e apresentações"
+  },
+  "mainLinksDetails": {
+    "youtube": {
+      "title": "YouTube",
+      "description": "Assista meus vídeos e tutoriais sobre desenvolvimento"
+    },
+    "newsletter": {
+      "title": "LinkedIn Newsletter",
+      "description": "Inscreva-se para receber insights profissionais e artigos"
+    },
+    "workWithMe": {
+      "title": "Work with me",
+      "description": "Conheça meu media kit e oportunidades de colaboração"
+    }
+  },
+  "profile": {
+    "bio": "Desenvolvedora, criadora de conteúdo e palestrante. Compartilhando conhecimento sobre tecnologia e desenvolvimento."
+  },
+  "speechesPage": {
+    "backToHome": "Voltar para a página inicial",
+    "title": "Minhas Palestras",
+    "subtitle": "Confira todas as minhas apresentações e palestras em conferências e eventos",
+    "empty": "Nenhuma palestra registrada ainda.",
+    "video": "Vídeo",
+    "slides": "Slides"
   },
   "workWithMe": {
     "title": "Trabalhe Comigo",
@@ -33,7 +58,8 @@
     "github": "GitHub"
   },
   "footer": {
-    "madeWith": "Feito com React + Vite + Tailwind CSS",
-    "inspiredBy": "Inspirado em templates open-source"
+  "byAna": "Desenvolvido por Ana Neri Dev",
+  "creditWeslleyPrefix": "Agradecimento especial ao projeto",
+  "creditWeslleySuffix": "que serviu como base e inspiração."
   }
 }

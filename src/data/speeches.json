@@ -1,37 +1,18 @@
 {
   "speeches": [
     {
-      "id": "react-performance",
-      "title": "React Performance Optimization",
-      "event": "Tech Conference 2024",
-      "date": "2024-03-15",
-      "description": "A deep dive into React optimization techniques, hooks performance, and rendering strategies.",
-      "videoUrl": "https://www.youtube.com/@AnaNeriDev",
+      "id": "playlist-palestras",
+      "title": "Playlist de Palestras - Ana Neri Dev",
+      "title_en": "Talks Playlist - Ana Neri Dev",
+      "event": "Palestras em conferências e eventos",
+      "event_en": "Talks at conferences and events",
+      "date": "2025-01-01",
+      "description": "Coleção das minhas palestras sobre tecnologia, carreira e desenvolvimento, reunidas nesta playlist do YouTube.",
+      "description_en": "A collection of my talks about technology, career and software development, all gathered in this YouTube playlist.",
+      "videoUrl": "https://www.youtube.com/playlist?list=PLmdyvKzGNf-ze5ICUGbYVKvPe-F57F_m_",
       "slidesUrl": "",
       "githubUrl": "",
-      "imageUrl": "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600"
-    },
-    {
-      "id": "web-development-trends",
-      "title": "Web Development Trends 2024",
-      "event": "Dev Summit 2024",
-      "date": "2024-02-20",
-      "description": "Exploring the latest trends in web development, from AI integration to new frameworks.",
-      "videoUrl": "https://www.youtube.com/@AnaNeriDev",
-      "slidesUrl": "",
-      "githubUrl": "",
-      "imageUrl": "https://images.pexels.com/photos/3194519/pexels-photo-3194519.jpeg?auto=compress&cs=tinysrgb&w=600"
-    },
-    {
-      "id": "typescript-beginners",
-      "title": "TypeScript for Beginners",
-      "event": "Coding Bootcamp 2024",
-      "date": "2024-01-30",
-      "description": "Get started with TypeScript and level up your JavaScript skills with type safety.",
-      "videoUrl": "https://www.youtube.com/@AnaNeriDev",
-      "slidesUrl": "",
-      "githubUrl": "",
-      "imageUrl": "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=600"
+      "imageUrl": ""
     }
   ]
 }

@@ -1,13 +1,42 @@
 import { useParams, Link } from 'react-router-dom';
 import { ExternalLink, Calendar, MapPin } from 'lucide-react';
 import pagesData from '../data/pages.json';
-import type { PagesData, PageItem } from '../types';
+import type { PagesData, PageItem, Page } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function ContentPage() {
   const { pageId } = useParams<{ pageId: string }>();
-  const page = pageId ? (pagesData as PagesData)[pageId] : null;
   const { t, language } = useLanguage();
+  const rawPage: (Page & { title_en?: string; description_en?: string }) | null =
+    pageId ? ((pagesData as PagesData)[pageId] as Page & { title_en?: string; description_en?: string }) : null;
+
+  // Suporte simples a i18n nos dados: campos *_en caem para o original se não existirem
+  const page: Page | null = rawPage
+    ? {
+      ...rawPage,
+      title:
+        language === 'pt'
+          ? rawPage.title
+          : rawPage.title_en || rawPage.title,
+      description:
+        language === 'pt'
+          ? rawPage.description
+          : rawPage.description_en || rawPage.description,
+      items: rawPage.items?.map(
+        (item: PageItem & { title_en?: string; description_en?: string }) => ({
+          ...item,
+          title:
+            language === 'pt'
+              ? item.title
+              : item.title_en || item.title,
+          description:
+            language === 'pt'
+              ? item.description
+              : item.description_en || item.description,
+        })
+      ),
+    }
+    : null;
 
   if (!page) {
     return (

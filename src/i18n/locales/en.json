@@ -6,11 +6,36 @@
     "pageNotFoundDescription": "The page you are looking for does not exist."
   },
   "home": {
-    "featuredContent": "Featured Content",
-    "mainLinks": "Main Links",
-    "moreContent": "More Content",
-    "speeches": "Speeches",
-    "speechesDescription": "Check out my speeches and presentations"
+  "featuredContent": "Featured Content",
+  "mainLinks": "Main Links",
+  "moreContent": "More Content",
+  "speeches": "Speeches",
+  "speechesDescription": "Check out my speeches and presentations"
+  },
+  "mainLinksDetails": {
+    "youtube": {
+      "title": "YouTube",
+      "description": "Watch my videos and tutorials about development"
+    },
+    "newsletter": {
+      "title": "LinkedIn Newsletter",
+      "description": "Subscribe to receive professional insights and articles"
+    },
+    "workWithMe": {
+      "title": "Work with me",
+      "description": "Learn more about my media kit and collaboration opportunities"
+    }
+  },
+  "profile": {
+    "bio": "Developer, content creator and speaker. Sharing knowledge about technology and software development."
+  },
+  "speechesPage": {
+    "backToHome": "Back to home",
+    "title": "My Speeches",
+    "subtitle": "Check out all my presentations and speeches at conferences and events",
+    "empty": "No speeches registered yet.",
+    "video": "Video",
+    "slides": "Slides"
   },
   "workWithMe": {
     "title": "Work with me",
@@ -33,7 +58,8 @@
     "github": "GitHub"
   },
   "footer": {
-    "madeWith": "Made with React + Vite + Tailwind CSS",
-    "inspiredBy": "Inspired by open-source templates"
+  "byAna": "Developed by Ana Neri Dev",
+  "creditWeslleyPrefix": "Special thanks to the",
+  "creditWeslleySuffix": "project, which served as base and inspiration."
   }
 }
