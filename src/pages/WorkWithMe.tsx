@@ -46,7 +46,7 @@ export function WorkWithMe() {
           <div className="space-y-4">
             {/* Card CODECON */}
             <a
-              href="https://devleaders.com.br/codecon" 
+              href="https://dvlpr.com.br/" 
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-full border-2 border-white bg-neutral-900 text-white px-6 py-4 flex items-center gap-4 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
