@@ -5,7 +5,6 @@ import { Social } from './components/Social';
 import { FeaturedBanner } from './components/FeaturedBanner';
 import { Background } from './components/Background';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-import { WorkWithMe } from './pages/WorkWithMe';
 import { ContentPage } from './pages/ContentPage';
 import { Speeches } from './pages/Speeches';
 import configData from './data/config.json';
@@ -17,6 +16,7 @@ import { useLanguage } from './contexts/LanguageContext';
 const iconMap: Record<string, React.ReactNode> = {
   youtube: <Youtube className="w-6 h-6 text-white" />,
   newsletter: <BookOpen className="w-6 h-6 text-white" />,
+  'newsletter-en': <BookOpen className="w-6 h-6 text-white" />,
   linkedin: <Linkedin className="w-6 h-6 text-white" />,
   github: <Github className="w-6 h-6 text-white" />,
   external: <ExternalLink className="w-6 h-6 text-white" />,
@@ -52,6 +52,11 @@ function Home() {
         return {
           title: t('mainLinksDetails.newsletter.title'),
           description: t('mainLinksDetails.newsletter.description'),
+        };
+      case 'newsletter-en':
+        return {
+          title: t('mainLinksDetails.newsletterEn.title'),
+          description: t('mainLinksDetails.newsletterEn.description'),
         };
       case 'external':
         return {
@@ -141,6 +146,72 @@ function Home() {
           </div>
         </section>
 
+        {/* Media Kit */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
+            <span className="w-1 h-8 bg-pink-500 rounded"></span>
+            {t('home.mediaKit')}
+          </h2>
+          <a
+            href="https://beacons.ai/ananeridev/mediakit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 p-6 bg-white border-2 border-black rounded-lg hover:bg-pink-50 hover:border-pink-500 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+          >
+            <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-black group-hover:bg-pink-500 rounded-lg transition-colors duration-300">
+              <ExternalLink className="w-6 h-6 text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-black group-hover:text-pink-600 transition-colors">
+                {t('home.mediaKitTitle')}
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                {t('home.mediaKitDescription')}
+              </p>
+            </div>
+          </a>
+        </section>
+
+        {/* Links de indicação / patrocinados */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
+            <span className="w-1 h-8 bg-pink-500 rounded"></span>
+            {t('home.referralLinks')}
+          </h2>
+
+          <div className="space-y-4">
+            {/* Card CODECON */}
+            <a
+              href="https://devleaders.com.br/codecon" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-full border-2 border-white bg-neutral-900 text-white px-6 py-4 flex items-center gap-4 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+            >
+              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-sm font-bold text-black border border-neutral-700">
+                DVLPR
+              </div>
+              <div className="flex-1 text-left">
+                <p className="text-lg font-semibold tracking-wide">
+                  {t('home.codeconDiscount')}
+                </p>
+                <p className="text-xs uppercase tracking-[0.2em] text-neutral-300 mt-1">
+                  {t('home.codeconCoupon')}
+                </p>
+              </div>
+            </a>
+
+            {/* Card itens de setup */}
+            <a
+              href="https://www.amazon.com.br/shop/anabneri" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-full border-2 border-white bg-neutral-900 text-white px-6 py-4 flex items-center justify-center text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+            >
+              {t('home.setupItems')}
+            </a>
+          </div>
+        </section>
+
         {/* Links para outras páginas */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
@@ -197,7 +268,6 @@ function App() {
         <LanguageSwitcher />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/work-with-me" element={<WorkWithMe />} />
           <Route path="/speeches" element={<Speeches />} />
           {/* rota antiga em PT redireciona para a nova URI em inglês */}
           <Route path="/palestras" element={<Navigate to="/speeches" replace />} />

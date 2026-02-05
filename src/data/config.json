@@ -35,10 +35,10 @@
       "icon": "newsletter"
     },
     {
-      "name": "Work with me",
-      "url": "/work-with-me",
-      "description": "Conheça meu media kit e oportunidades de colaboração",
-      "icon": "external"
+      "name": "Substack Newsletter",
+      "url": "https://neribia7.substack.com/",
+      "description": "Subscribe to receive professional insights and articles in English",
+      "icon": "newsletter-en"
     }
   ],
   "featuredContent": [

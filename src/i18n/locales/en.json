@@ -8,6 +8,13 @@
   "home": {
   "featuredContent": "Featured Content",
   "mainLinks": "Main Links",
+  "mediaKit": "Media Kit",
+  "mediaKitTitle": "Work with me",
+  "mediaKitDescription": "Access my complete media kit and collaboration opportunities",
+  "referralLinks": "Referral Links",
+  "codeconDiscount": "$15 OFF AT CODECON STORE",
+  "codeconCoupon": "COUPON: ANANERI15",
+  "setupItems": "My setup items",
   "moreContent": "More Content",
   "speeches": "Speeches",
   "speechesDescription": "Check out my speeches and presentations"
@@ -18,8 +25,12 @@
       "description": "Watch my videos and tutorials about development"
     },
     "newsletter": {
-      "title": "LinkedIn Newsletter",
-      "description": "Subscribe to receive professional insights and articles"
+      "title": "TechInsights Weekly",
+      "description": "Newsletter in Portuguese on LinkedIn - Subscribe to receive professional insights and articles"
+    },
+    "newsletterEn": {
+      "title": "TechInsights Weekly",
+      "description": "Newsletter in English on Substack - Subscribe to receive professional insights and articles"
     },
     "workWithMe": {
       "title": "Work with me",

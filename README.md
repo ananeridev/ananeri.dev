@@ -9,11 +9,12 @@ Este projeto foi inspirado no template [weslley.io](https://github.com/wellwelwe
 - 🎨 Design moderno com cores personalizáveis (padrão: rosa, preto e branco)
 - 📱 Totalmente responsivo (mobile, tablet, desktop)
 - 🌍 Suporte a múltiplos idiomas (Português e Inglês)
-- 🎥 Integração com YouTube e LinkedIn Newsletter
+- 🎥 Integração com YouTube, LinkedIn Newsletter e Substack
 - 📊 Seção de conteúdo em destaque
 - 🎤 Página dedicada para palestras e apresentações
-- 💼 Página "Work with me" com media kit
+- 💼 Seção de media kit e links de indicação/patrocínios
 - 🎨 Ícones animados de fundo personalizáveis
+- 🚀 Deploy automático via GitHub Actions
 - ⚡ Construído com React, Vite e Tailwind CSS
 
 ## Estrutura de Arquivos
@@ -32,8 +33,7 @@ src/
 │   └── Social.tsx      # Ícones de redes sociais
 ├── pages/              # Páginas da aplicação
 │   ├── ContentPage.tsx # Página de conteúdo dinâmico
-│   ├── Speeches.tsx    # Lista de palestras
-│   └── WorkWithMe.tsx  # Página de colaborações
+│   └── Speeches.tsx    # Lista de palestras
 ├── data/               # Arquivos de configuração JSON
 │   ├── config.json     # Configuração principal
 │   ├── featured.json   # Conteúdo em destaque
@@ -86,7 +86,8 @@ Adicione ou modifique os links em `src/data/config.json`:
 
 Ícones disponíveis:
 - `youtube` - Ícone do YouTube
-- `newsletter` - Ícone de newsletter (livro)
+- `newsletter` - Ícone de newsletter em português (livro)
+- `newsletter-en` - Ícone de newsletter em inglês (livro)
 - `linkedin` - Ícone do LinkedIn
 - `github` - Ícone do GitHub
 - `external` - Ícone de link externo
@@ -245,51 +246,45 @@ npm run lint:fix
 
 ## Deploy
 
-### GitHub Pages
+### GitHub Pages (Configurado automaticamente! 🚀)
 
-1. Crie um repositório no GitHub
-2. Configure o repositório como público
-3. Em "Settings" > "Pages", selecione "Deploy from a branch"
-4. Faça push da pasta `dist/` ou configure um workflow de CI/CD
+Este projeto já vem configurado com GitHub Actions para deploy automático no GitHub Pages!
 
-**Opção com GitHub Actions:**
+**Como usar:**
 
-Crie `.github/workflows/deploy.yml`:
+1. Faça push do repositório para o GitHub
+2. Vá em `Settings` → `Pages` do seu repositório
+3. Em `Source`, selecione `GitHub Actions`
+4. Pronto! A cada push na branch `main`, o site será atualizado automaticamente
 
-```yaml
-name: Deploy
+**Atualizando conteúdo:**
+- Edite `src/data/config.json` com seus novos links
+- Commit e push para a branch `main`
+- Aguarde 2-3 minutos para o deploy automático
 
-on:
-  push:
-    branches: [main]
+**Configurando domínio personalizado:**
+- O arquivo `public/CNAME` já está configurado para `ananeri.dev`
+- Edite este arquivo se usar outro domínio
+- Configure os DNS do seu provedor conforme instruções em `DEPLOY.md`
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+**Deploy manual (opcional):**
+```bash
+npm run deploy
 ```
 
-### Vercel
+### Outras Plataformas
 
+#### Vercel
 1. Conecte seu repositório ao Vercel
 2. Selecione "Vite" como framework
 3. Deploy automático acontecerá a cada push
 
-### Netlify
-
+#### Netlify
 1. Conecte seu repositório ao Netlify
 2. Configure o comando de build: `npm run build`
 3. Configure a pasta de deploy: `dist`
+
+Para mais detalhes sobre deploy, consulte `DEPLOY.md`.
 
 ## Licença
 

@@ -8,6 +8,13 @@
   "home": {
   "featuredContent": "Conteúdo em Destaque",
   "mainLinks": "Links Principais",
+  "mediaKit": "Media Kit",
+  "mediaKitTitle": "Work with me",
+  "mediaKitDescription": "Acesse meu media kit completo e oportunidades de colaboração",
+  "referralLinks": "Links de Indicação",
+  "codeconDiscount": "15$ OFF NA LOJA DA CODECON",
+  "codeconCoupon": "CUPOM: ANANERI15",
+  "setupItems": "Itens do meu setup",
   "moreContent": "Mais Conteúdo",
   "speeches": "Palestras",
   "speechesDescription": "Confira minhas palestras e apresentações"
@@ -18,8 +25,12 @@
       "description": "Assista meus vídeos e tutoriais sobre desenvolvimento"
     },
     "newsletter": {
-      "title": "LinkedIn Newsletter",
-      "description": "Inscreva-se para receber insights profissionais e artigos"
+      "title": "TechInsights Weekly",
+      "description": "Newsletter em português no LinkedIn - Inscreva-se para receber insights profissionais e artigos"
+    },
+    "newsletterEn": {
+      "title": "TechInsights Weekly",
+      "description": "Newsletter em inglês no Substack - Subscribe to receive professional insights and articles"
     },
     "workWithMe": {
       "title": "Work with me",
