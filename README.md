@@ -1,6 +1,6 @@
 # Personal Link Hub
 
-My personal site! Finally LOL
+Finally I decided to create my own link hub and "personal website"
 
 Inspired by [weslley.io](https://github.com/wellwelwel/weslley.io) - TKS man!
 
@@ -47,11 +47,3 @@ npm run build    # Production build
 ## Tech Stack
 
 React 18 • TypeScript • Vite • Tailwind CSS • React Router • Lucide Icons
-
-## License
-
-AGPL-3.0
-
----
-
-Built with React + Vite + Tailwind CSS (No purely CSS yet)
