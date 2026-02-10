@@ -44,7 +44,6 @@ export function WorkWithMe() {
           </h2>
 
           <div className="space-y-4">
-            {/* Card CODECON */}
             <a
               href="https://dvlpr.com.br/" 
               target="_blank"
