@@ -172,7 +172,6 @@ function Home() {
           </a>
         </section>
 
-        {/* Links de indicação / patrocinados */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
             <span className="w-1 h-8 bg-pink-500 rounded"></span>
