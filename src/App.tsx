@@ -27,14 +27,12 @@ function Home() {
   const { latestVideoUrl, latestVideoThumbnail, latestVideoTitle, loading } = useLatestContent();
   const { t } = useLanguage();
   
-  // Prepara dados dinâmicos do vídeo
   const dynamicVideo = latestVideoUrl && latestVideoThumbnail ? {
     url: latestVideoUrl,
     thumbnail: latestVideoThumbnail,
     title: latestVideoTitle || 'Último Vídeo'
   } : null;
   
-  // Busca conteúdo com dados dinâmicos
   const latestContent = getLatestFeaturedContent(dynamicVideo, null);
 
   // Destaque específico para newsletter nos main links

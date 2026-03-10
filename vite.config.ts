@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import youtubeRssPlugin from './plugins/youtube-rss-plugin';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [youtubeRssPlugin(), react()],
   base: '/',
   optimizeDeps: {
     exclude: ['lucide-react'],

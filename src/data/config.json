@@ -44,8 +44,8 @@
   "featuredContent": [
     {
       "title": "Último Vídeo",
-      "imageUrl": "https://via.placeholder.com/800x400?text=Latest+Video",
-      "url": "https://www.youtube.com/@AnaNeriDev",
+      "imageUrl": "https://img.youtube.com/vi/cbJE_kRKuRs/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=cbJE_kRKuRs",
       "description": "Confira meu vídeo mais recente sobre desenvolvimento web",
       "type": "video"
     },

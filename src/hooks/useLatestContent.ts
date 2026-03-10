@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import buildTimeVideo from 'virtual:latest-video';
 
 interface LatestContentData {
   latestVideoUrl: string | null;
@@ -30,37 +31,7 @@ function extractVideoId(link: string): string | null {
   return null;
 }
 
-async function fetchViaRss2Json(): Promise<VideoInfo> {
-  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
-  const rss2JsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-  const response = await fetch(rss2JsonUrl);
-  if (!response.ok) throw new Error(`rss2json HTTP ${response.status}`);
-
-  const data = await response.json();
-  if (data.status === 'error') throw new Error(`rss2json: ${data.message}`);
-  if (!data.items?.length) throw new Error('rss2json: feed vazio');
-
-  const item = data.items[0];
-  const link = item.link || item.url || '';
-  const videoId = extractVideoId(link) || item.guid?.split(':').pop() || item.id || null;
-  if (!videoId) throw new Error('rss2json: não encontrou videoId');
-
-  return {
-    url: `https://www.youtube.com/watch?v=${videoId}`,
-    videoId,
-    title: item.title || 'Último Vídeo',
-  };
-}
-
-async function fetchViaDirectXml(): Promise<VideoInfo> {
-  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
-
-  const response = await fetch(proxyUrl);
-  if (!response.ok) throw new Error(`allorigins HTTP ${response.status}`);
-
-  const xml = await response.text();
+function parseVideoFromXml(xml: string): VideoInfo {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'application/xml');
 
@@ -84,42 +55,106 @@ async function fetchViaDirectXml(): Promise<VideoInfo> {
   };
 }
 
+async function fetchViaRss2Json(): Promise<VideoInfo> {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+  const rss2JsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+  const response = await fetch(rss2JsonUrl);
+  if (!response.ok) throw new Error(`rss2json HTTP ${response.status}`);
+
+  const data = await response.json();
+  if (data.status === 'error') throw new Error(`rss2json: ${data.message}`);
+  if (!data.items?.length) throw new Error('rss2json: feed vazio');
+
+  const item = data.items[0];
+  const link = item.link || item.url || '';
+  const videoId = extractVideoId(link) || item.guid?.split(':').pop() || item.id || null;
+  if (!videoId) throw new Error('rss2json: não encontrou videoId');
+
+  return {
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+    videoId,
+    title: item.title || 'Último Vídeo',
+  };
+}
+
+async function fetchViaCodetabs(): Promise<VideoInfo> {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+  const proxyUrl = `https://api.codetabs.com/v1/proxy/?quest=${rssUrl}`;
+
+  const response = await fetch(proxyUrl);
+  if (!response.ok) throw new Error(`codetabs HTTP ${response.status}`);
+
+  return parseVideoFromXml(await response.text());
+}
+
+async function fetchViaAllOrigins(): Promise<VideoInfo> {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+
+  const response = await fetch(proxyUrl);
+  if (!response.ok) throw new Error(`allorigins HTTP ${response.status}`);
+
+  return parseVideoFromXml(await response.text());
+}
+
+async function fetchDynamic(): Promise<VideoInfo> {
+  const strategies = [fetchViaRss2Json, fetchViaCodetabs, fetchViaAllOrigins];
+
+  for (let i = 0; i < strategies.length; i++) {
+    try {
+      return await strategies[i]();
+    } catch (err) {
+      console.warn(`Estratégia ${i + 1} falhou:`, err);
+      if (i === strategies.length - 1) throw err;
+    }
+  }
+
+  throw new Error('Todas as estratégias falharam');
+}
+
+function getBuildTimeVideo(): VideoInfo | null {
+  if (!buildTimeVideo) return null;
+  return {
+    url: buildTimeVideo.url,
+    videoId: buildTimeVideo.videoId,
+    title: buildTimeVideo.title,
+  };
+}
+
 export function useLatestContent(): LatestContentData {
+  const fallback = getBuildTimeVideo();
+
   const [content, setContent] = useState<LatestContentData>({
-    latestVideoUrl: null,
-    latestVideoThumbnail: null,
-    latestVideoTitle: null,
+    latestVideoUrl: fallback?.url ?? null,
+    latestVideoThumbnail: fallback ? `https://img.youtube.com/vi/${fallback.videoId}/maxresdefault.jpg` : null,
+    latestVideoTitle: fallback?.title ?? null,
     latestNewsletterUrl: null,
-    loading: true,
+    loading: !fallback,
     error: null,
   });
 
   useEffect(() => {
     async function fetchLatest() {
       try {
-        let video: VideoInfo | null = null;
-
-        try {
-          video = await fetchViaRss2Json();
-        } catch (err) {
-          console.warn('rss2json falhou, tentando fallback XML:', err);
-          video = await fetchViaDirectXml();
-        }
+        const video = await fetchDynamic();
 
         setContent(prev => ({
           ...prev,
-          latestVideoUrl: video!.url,
-          latestVideoThumbnail: `https://img.youtube.com/vi/${video!.videoId}/maxresdefault.jpg`,
-          latestVideoTitle: video!.title,
+          latestVideoUrl: video.url,
+          latestVideoThumbnail: `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`,
+          latestVideoTitle: video.title,
           loading: false,
         }));
       } catch (error) {
         console.error('Erro ao buscar conteúdo do YouTube:', error);
-        setContent(prev => ({
-          ...prev,
-          error: 'Não foi possível carregar o último vídeo',
-          loading: false,
-        }));
+        if (!fallback) {
+          setContent(prev => ({
+            ...prev,
+            error: 'Não foi possível carregar o último vídeo',
+            loading: false,
+          }));
+        }
       }
     }
 
