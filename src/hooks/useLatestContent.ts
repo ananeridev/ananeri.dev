@@ -9,7 +9,80 @@ interface LatestContentData {
   error: string | null;
 }
 
+interface VideoInfo {
+  url: string;
+  videoId: string;
+  title: string;
+}
+
 const YOUTUBE_CHANNEL_ID = 'UCBjoWT-P17Bl66D52RwqdGA';
+
+function extractVideoId(link: string): string | null {
+  if (link.includes('youtube.com/watch')) {
+    return link.match(/[?&]v=([^&]+)/)?.[1] ?? null;
+  }
+  if (link.includes('youtu.be/')) {
+    return link.split('youtu.be/')[1]?.split('?')[0] ?? null;
+  }
+  if (link.includes('youtube.com/v/')) {
+    return link.split('youtube.com/v/')[1]?.split('?')[0] ?? null;
+  }
+  return null;
+}
+
+async function fetchViaRss2Json(): Promise<VideoInfo> {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+  const rss2JsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+  const response = await fetch(rss2JsonUrl);
+  if (!response.ok) throw new Error(`rss2json HTTP ${response.status}`);
+
+  const data = await response.json();
+  if (data.status === 'error') throw new Error(`rss2json: ${data.message}`);
+  if (!data.items?.length) throw new Error('rss2json: feed vazio');
+
+  const item = data.items[0];
+  const link = item.link || item.url || '';
+  const videoId = extractVideoId(link) || item.guid?.split(':').pop() || item.id || null;
+  if (!videoId) throw new Error('rss2json: não encontrou videoId');
+
+  return {
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+    videoId,
+    title: item.title || 'Último Vídeo',
+  };
+}
+
+async function fetchViaDirectXml(): Promise<VideoInfo> {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+
+  const response = await fetch(proxyUrl);
+  if (!response.ok) throw new Error(`allorigins HTTP ${response.status}`);
+
+  const xml = await response.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xml, 'application/xml');
+
+  const entries = doc.getElementsByTagNameNS('http://www.w3.org/2005/Atom', 'entry');
+  if (!entries.length) throw new Error('XML: feed vazio');
+
+  const entry = entries[0];
+  const videoIdEl = entry.getElementsByTagNameNS(
+    'http://www.youtube.com/xml/schemas/2015', 'videoId'
+  )[0];
+  const videoId = videoIdEl?.textContent?.trim();
+  if (!videoId) throw new Error('XML: não encontrou videoId');
+
+  const titleEl = entry.getElementsByTagNameNS('http://www.w3.org/2005/Atom', 'title')[0];
+  const title = titleEl?.textContent?.trim() || 'Último Vídeo';
+
+  return {
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+    videoId,
+    title,
+  };
+}
 
 export function useLatestContent(): LatestContentData {
   const [content, setContent] = useState<LatestContentData>({
@@ -24,57 +97,22 @@ export function useLatestContent(): LatestContentData {
   useEffect(() => {
     async function fetchLatest() {
       try {
-        // Busca último vídeo do YouTube via RSS
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
-        const rss2JsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-        
-        const response = await fetch(rss2JsonUrl);
-        
-        if (!response.ok) {
-          throw new Error('Erro ao buscar RSS do YouTube');
+        let video: VideoInfo | null = null;
+
+        try {
+          video = await fetchViaRss2Json();
+        } catch (err) {
+          console.warn('rss2json falhou, tentando fallback XML:', err);
+          video = await fetchViaDirectXml();
         }
-        
-        const data = await response.json();
-        
-        if (data.items && data.items.length > 0) {
-          const latestVideo = data.items[0];
-          
-          // Extrai o ID do vídeo da URL (suporta múltiplos formatos)
-          let videoId = null;
-          const link = latestVideo.link || latestVideo.url || '';
-          
-          // Tenta diferentes formatos de URL do YouTube
-          if (link.includes('youtube.com/watch')) {
-            videoId = link.match(/[?&]v=([^&]+)/)?.[1];
-          } else if (link.includes('youtu.be/')) {
-            videoId = link.split('youtu.be/')[1]?.split('?')[0];
-          } else if (link.includes('youtube.com/v/')) {
-            videoId = link.split('youtube.com/v/')[1]?.split('?')[0];
-          } else if (latestVideo.guid) {
-            // RSS feed geralmente tem o ID no guid
-            videoId = latestVideo.guid.split(':').pop();
-          }
-          
-          // Se não encontrou o ID, tenta extrair do título ou outras propriedades
-          if (!videoId && latestVideo.id) {
-            videoId = latestVideo.id;
-          }
-          
-          // Gera thumbnail (YouTube sempre tem formato padrão)
-          const thumbnail = videoId 
-            ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-            : null;
-          
-          setContent(prev => ({
-            ...prev,
-            latestVideoUrl: link,
-            latestVideoThumbnail: thumbnail,
-            latestVideoTitle: latestVideo.title || 'Último Vídeo',
-            loading: false,
-          }));
-        } else {
-          setContent(prev => ({ ...prev, loading: false }));
-        }
+
+        setContent(prev => ({
+          ...prev,
+          latestVideoUrl: video!.url,
+          latestVideoThumbnail: `https://img.youtube.com/vi/${video!.videoId}/maxresdefault.jpg`,
+          latestVideoTitle: video!.title,
+          loading: false,
+        }));
       } catch (error) {
         console.error('Erro ao buscar conteúdo do YouTube:', error);
         setContent(prev => ({
