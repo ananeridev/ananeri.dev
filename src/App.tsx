@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Github, Linkedin, Youtube, BookOpen, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Youtube, BookOpen, ExternalLink, Boxes, ArrowRight } from 'lucide-react';
 import { Profile } from './components/Profile';
 import { Social } from './components/Social';
 import { FeaturedBanner } from './components/FeaturedBanner';
@@ -142,6 +142,46 @@ function Home() {
               })()
             ))}
           </div>
+        </section>
+
+        {/* SysDojo - Minha plataforma de System Design */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-black mb-6 flex items-center gap-2">
+            <span className="w-1 h-8 bg-pink-500 rounded"></span>
+            {t('home.sysdojoSection')}
+          </h2>
+          <a
+            href="https://sysdojo.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block overflow-hidden rounded-2xl border-2 border-black bg-neutral-900 p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-pink-500 hover:shadow-2xl"
+          >
+            {/* Glow decorativo que reage ao hover */}
+            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-pink-500/20 blur-3xl transition-all duration-500 group-hover:bg-pink-500/40 group-hover:scale-125"></div>
+
+            <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center">
+              <div className="flex-shrink-0 flex h-16 w-16 items-center justify-center rounded-xl bg-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                <Boxes className="h-8 w-8 text-neutral-900" />
+              </div>
+
+              <div className="flex-1">
+                <span className="inline-block rounded-full bg-pink-500 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white">
+                  {t('home.sysdojoBadge')}
+                </span>
+                <h3 className="mt-3 text-2xl font-bold text-white">
+                  {t('home.sysdojoTitle')}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+                  {t('home.sysdojoDescription')}
+                </p>
+
+                <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-pink-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-neutral-900">
+                  {t('home.sysdojoCta')}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </div>
+            </div>
+          </a>
         </section>
 
         {/* Media Kit */}
