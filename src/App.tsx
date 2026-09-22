@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Github, Linkedin, Youtube, BookOpen, ExternalLink, Boxes, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Youtube, BookOpen, ExternalLink, Boxes, ArrowRight, Cloud } from 'lucide-react';
 import { Profile } from './components/Profile';
 import { Social } from './components/Social';
 import { FeaturedBanner } from './components/FeaturedBanner';
@@ -19,6 +19,7 @@ const iconMap: Record<string, React.ReactNode> = {
   'newsletter-en': <BookOpen className="w-6 h-6 text-white" />,
   linkedin: <Linkedin className="w-6 h-6 text-white" />,
   github: <Github className="w-6 h-6 text-white" />,
+  cloud: <Cloud className="w-6 h-6 text-white" />,
   external: <ExternalLink className="w-6 h-6 text-white" />,
 };
 
@@ -55,6 +56,11 @@ function Home() {
         return {
           title: t('mainLinksDetails.newsletterEn.title'),
           description: t('mainLinksDetails.newsletterEn.description'),
+        };
+      case 'cloud':
+        return {
+          title: t('mainLinksDetails.locaweb.title'),
+          description: t('mainLinksDetails.locaweb.description'),
         };
       case 'external':
         return {
@@ -233,26 +239,6 @@ function Home() {
                 </p>
                 <p className="text-xs uppercase tracking-[0.2em] text-neutral-300 mt-1">
                   {t('home.codeconCoupon')}
-                </p>
-              </div>
-            </a>
-
-            {/* Card Locaweb Cloud */}
-            <a
-              href="https://www.locaweb.com.br/locaweb-cloud/?utm_source=parceiros&utm_medium=ananeri&utm_campaign=gtmcloud-set-26-reels-ig"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-full border-2 border-white bg-neutral-900 text-white px-6 py-4 flex items-center gap-4 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
-            >
-              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-xs font-bold text-black border border-neutral-700">
-                CLOUD
-              </div>
-              <div className="flex-1 text-left">
-                <p className="text-lg font-semibold tracking-wide">
-                  {t('home.locawebDiscount')}
-                </p>
-                <p className="text-xs uppercase tracking-[0.2em] text-neutral-300 mt-1">
-                  {t('home.locawebCoupon')}
                 </p>
               </div>
             </a>
