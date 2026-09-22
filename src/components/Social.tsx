@@ -5,11 +5,14 @@ interface SocialProps {
   icon: React.ReactNode;
   url: string;
   description?: string;
+  /** Cor de fundo do quadrado do ícone - padrão preto com hover rosa */
+  iconBgClassName?: string;
 }
 
-export function Social({ name, icon, url, description }: SocialProps) {
+export function Social({ name, icon, url, description, iconBgClassName }: SocialProps) {
   const isExternal = url.startsWith('http://') || url.startsWith('https://');
   const className = "group flex items-center gap-4 p-6 bg-white border-2 border-black rounded-lg hover:bg-pink-50 hover:border-pink-500 transition-all duration-300 hover:scale-105 hover:shadow-xl";
+  const iconClassName = `flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-300 ${iconBgClassName ?? 'bg-black group-hover:bg-pink-500'}`;
 
   if (isExternal) {
     return (
@@ -19,7 +22,7 @@ export function Social({ name, icon, url, description }: SocialProps) {
         rel="noopener noreferrer"
         className={className}
       >
-        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-black group-hover:bg-pink-500 rounded-lg transition-colors duration-300">
+        <div className={iconClassName}>
           {icon}
         </div>
         <div className="flex-1">
@@ -39,7 +42,7 @@ export function Social({ name, icon, url, description }: SocialProps) {
       to={url}
       className={className}
     >
-      <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-black group-hover:bg-pink-500 rounded-lg transition-colors duration-300">
+      <div className={iconClassName}>
         {icon}
       </div>
       <div className="flex-1">

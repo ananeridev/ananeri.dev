@@ -126,6 +126,7 @@ function Home() {
                   icon={iconMap[newsletterLink.icon] || iconMap.newsletter}
                   url={newsletterLink.url}
                   description={texts.description || newsletterLink.description}
+                  iconBgClassName="bg-[#0A66C2] group-hover:bg-pink-500"
                 />
                   );
                 })()}
