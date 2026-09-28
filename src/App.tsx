@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Github, Linkedin, Youtube, BookOpen, ExternalLink, Boxes, ArrowRight, Cloud } from 'lucide-react';
+import { Github, Linkedin, Youtube, BookOpen, ExternalLink, Boxes, ArrowRight, Cloud, Ticket } from 'lucide-react';
 import { Profile } from './components/Profile';
 import { Social } from './components/Social';
 import { FeaturedBanner } from './components/FeaturedBanner';
@@ -115,6 +115,39 @@ function Home() {
             {t('home.mainLinks')}
           </h2>
           <div className="grid gap-4">
+            {/* Codecon Select Experience em destaque */}
+            <a
+              href="https://app.codecon.dev/eventos/select-experience-26?c=PALESTRANTE20"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block overflow-hidden rounded-2xl border-2 border-pink-500 bg-gradient-to-br from-neutral-900 via-neutral-900 to-pink-900 p-6 shadow-lg ring-4 ring-pink-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:ring-pink-500/40"
+            >
+              <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-pink-500/30 blur-3xl transition-all duration-500 group-hover:scale-125 group-hover:bg-pink-500/50"></div>
+
+              <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-xl bg-pink-500 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                  <Ticket className="h-7 w-7 text-white" />
+                </div>
+
+                <div className="flex-1">
+                  <span className="inline-block rounded-full bg-white px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-pink-600">
+                    {t('home.selectBadge')}
+                  </span>
+                  <h3 className="mt-2 text-xl font-bold text-white">
+                    {t('home.selectTitle')}
+                  </h3>
+                  <p className="mt-1 text-sm text-neutral-300">
+                    {t('home.selectDescription')}
+                  </p>
+                </div>
+
+                <span className="inline-flex items-center justify-center gap-2 self-start rounded-lg border-2 border-dashed border-white/80 px-4 py-2 font-mono text-sm font-bold tracking-widest text-white transition-colors duration-300 group-hover:border-pink-300 group-hover:bg-white group-hover:text-pink-600 sm:self-center">
+                  PALESTRANTE20
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </div>
+            </a>
+
             {/* Newsletter em destaque */}
             {newsletterLink && (
               <div className="border-2 border-pink-500 rounded-xl p-1 bg-pink-50/60 shadow-[0_0_0_1px_rgba(0,0,0,0.1)]">
